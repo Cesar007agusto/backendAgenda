@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import MetodosLogic from "../controller/metodos.logic";
 import TareasDao from "../dao/tareasDao";
+import { CustomRequest } from "../../../doc/@types/customRequest";
 
 
 class TareaController extends TareasDao {
@@ -25,11 +26,16 @@ class TareaController extends TareasDao {
 
   }
 
-  public async crearTarea(req: Request, res: Response): Promise<void> {
+  public async crearTarea(req: CustomRequest, res: Response): Promise<void> {
+
     const name = req.body.nombre;
     const date = req.body.fecha;
     const state = req.body.estado;
-    const parametros = [name, date, state];
+
+    const codUser=req.body.usuario;
+    console.log("coduserio",codUser);
+    const parametros = [name, date, state,codUser];
+
 
     try {
       const resultado = await TareaController.crearTareaDao(parametros);

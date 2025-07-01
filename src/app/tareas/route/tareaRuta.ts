@@ -1,5 +1,6 @@
 import { Router } from "express";
 import tareaControlador from "../controller/tareaControlador";
+import seguridad from "../../../middleware/seguridad";
 
 class TareaRuta {
 
@@ -13,10 +14,10 @@ class TareaRuta {
 
     public configuracion(): void {
         //http://localhost:3000/tareas/paginate
-        this.rutaTareaAPI.get("/paginate", tareaControlador.mostrarTareas);
+        this.rutaTareaAPI.get("/paginate",tareaControlador.mostrarTareas);
 
         // http://localhost:3000/tareas/create
-        this.rutaTareaAPI.post("/create", tareaControlador.crearTarea);
+        this.rutaTareaAPI.post("/create",tareaControlador.crearTarea);
 
         //http://localhost:3000/tareas/delete
         this.rutaTareaAPI.delete("/delete/:codTarea", tareaControlador.eliminarTarea);

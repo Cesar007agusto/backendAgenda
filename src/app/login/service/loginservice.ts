@@ -26,11 +26,14 @@ class LoginService extends LoginDao {
                 if (!clave) {
                     console.log('SECRET_KEY no definida');
                 } else {
-                    const token = jwt.sign(payload, clave, { expiresIn: '5m' });
+                    const token = jwt.sign(payload, clave, { expiresIn: '30m' });
                     console.log('Token generado:', token);
                     return token;
                 }
 
+            }else{
+                console.log("contraseña incorrecta");
+                return {mensaje:"contraseña incorrecta"};
             }
 
         } else {
