@@ -21,7 +21,8 @@ class LoginService extends LoginDao {
 
                 const payload = {
                     nombre: usuariobd.nombre,
-                    correo: usuariobd.correo
+                    correo: usuariobd.correo,
+                    codUsuario: usuariobd.cod_usuario
                 };
                 if (!clave) {
                     console.log('SECRET_KEY no definida');

@@ -14,10 +14,10 @@ class TareaRuta {
 
     public configuracion(): void {
         //http://localhost:3000/tareas/paginate
-        this.rutaTareaAPI.get("/paginate",tareaControlador.mostrarTareas);
+        this.rutaTareaAPI.get("/paginate",seguridad.verificarToken,tareaControlador.mostrarTareas);
 
         // http://localhost:3000/tareas/create
-        this.rutaTareaAPI.post("/create",tareaControlador.crearTarea);
+        this.rutaTareaAPI.post("/create",seguridad.verificarToken,tareaControlador.crearTarea);
 
         //http://localhost:3000/tareas/delete
         this.rutaTareaAPI.delete("/delete/:codTarea", tareaControlador.eliminarTarea);
@@ -26,7 +26,7 @@ class TareaRuta {
         this.rutaTareaAPI.put("/update",tareaControlador.actualizarTarea);
 
         //http://localhost:3000/tareas/notificaciones
-        this.rutaTareaAPI.get("/notificaciones",tareaControlador.notificaciones);
+        this.rutaTareaAPI.get("/notificaciones",seguridad.verificarToken,tareaControlador.notificaciones);
 
 
     }

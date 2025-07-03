@@ -6,10 +6,12 @@ import { CustomRequest } from "../../../doc/@types/customRequest";
 
 class TareaController extends TareasDao {
 
-  public async mostrarTareas(req: Request, res: Response): Promise<void> {
+  public async mostrarTareas(req: CustomRequest, res: Response): Promise<void> {
+    const codUsuario =req.body.usuario.codUsuario;
+
 
     try {
-      const tareas = await TareaController.obtenerTareasDao();
+      const tareas = await TareaController.obtenerTareasDao(codUsuario);
 
       tareas.map((tarea: any) => {
 
@@ -32,8 +34,8 @@ class TareaController extends TareasDao {
     const date = req.body.fecha;
     const state = req.body.estado;
 
-    const codUser=req.body.usuario;
-    console.log("coduserio",codUser);
+    const codUser=req.body.usuario.codUsuario;
+    
     const parametros = [name, date, state,codUser];
 
 
@@ -80,9 +82,10 @@ class TareaController extends TareasDao {
 
   }
 
-  public async notificaciones(req: Request, res: Response){
+  public async notificaciones(req: CustomRequest, res: Response){
+    const codUser= req.body.usuario.codUsuario;
     try {
-      const registros = await TareaController.notificacionesDao();
+      const registros = await TareaController.notificacionesDao(codUser);
       res.status(200).json(registros);
 
     } catch (error) {

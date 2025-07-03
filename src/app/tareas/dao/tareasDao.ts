@@ -4,11 +4,12 @@ import pool from "../../../config/connexion/connexionDB";
 
 class TareasDao {
   //obtener registros
-  protected static async obtenerTareasDao(): Promise<any> {
+  protected static async obtenerTareasDao(parametros:any): Promise<any> {
+    
 
     const salida = await pool.task(async (consulta) => {
 
-      const registros = await consulta.result(SQL_TAREAS.OBTENER_TAREAS);
+      const registros = await consulta.result(SQL_TAREAS.OBTENER_TAREAS,parametros);
 
       // Aquí extraemos solo las filas (registros) que contienen los datos de las tareas, se eliminan metadatos
       const tareas = registros.rows.map((tarea: any) => ({
@@ -55,9 +56,9 @@ class TareasDao {
 
   }
 
-  protected static async notificacionesDao():Promise<any>{
+  protected static async notificacionesDao(parametros:any):Promise<any>{
     return pool.task((Query)=>{
-      return Query.manyOrNone(SQL_TAREAS.TAREAS_PARA_HOY);
+      return Query.manyOrNone(SQL_TAREAS.TAREAS_PARA_HOY,parametros);
     });
 
   }

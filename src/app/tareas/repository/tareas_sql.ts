@@ -3,14 +3,15 @@ export const SQL_TAREAS = {
 
   OBTENER_TAREAS:
     //Where cod_usuario =
-    "SELECT t.cod_tarea,t.cod_usuario,t.nombre,t.fecha,t.estado\
-      FROM tareas t \
-      ORDER BY fecha ASC \
-      ",
+    `SELECT t.cod_tarea,t.cod_usuario,t.nombre,t.fecha,t.estado
+      FROM tareas t
+      WHERE t.cod_usuario=$1
+      ORDER BY fecha ASC`
+  ,
 
   INSERTAR_TAREA:
-    `INSERT INTO tareas (nombre,fecha,estado)
-      VALUES ($1,$2,$3)
+    `INSERT INTO tareas (nombre,fecha,estado,cod_usuario)
+      VALUES ($1,$2,$3,$4)
       RETURNING nombre
       `,
 
@@ -29,8 +30,7 @@ export const SQL_TAREAS = {
       RETURNING nombre`,
 
   TAREAS_PARA_HOY:
-  `SELECT *
-   FROM tareas
-   WHERE fecha = CURRENT_DATE`
+    `SELECT * FROM tareas
+      WHERE fecha = CURRENT_DATE AND cod_usuario=$1`
 
 }
