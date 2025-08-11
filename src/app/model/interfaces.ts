@@ -10,6 +10,8 @@ export interface Excel{
     nombre:any;
     fecha:any;
     estado:any;
+    cod_usuario:any;
+    
 }
 
 export interface User {

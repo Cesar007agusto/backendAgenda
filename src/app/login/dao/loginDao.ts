@@ -5,7 +5,7 @@ import { SQL_LOGIN } from "../repository/login_sql";
 
 class LoginDao{
 
-    static async validarUsuarioDao(parametros:User){
+    public async validarUsuarioDao(parametros:User){
 
         const usuariobd = await pool.oneOrNone(SQL_LOGIN.VERIFICAR_USER,parametros);
         //si no hay datos es null. si hay me regresa el correo y contraseña en la bd
@@ -16,4 +16,5 @@ class LoginDao{
     }
 
 }
-export default LoginDao;
+const loginDao = new LoginDao();
+export default loginDao;

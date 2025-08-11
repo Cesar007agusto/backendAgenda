@@ -5,7 +5,7 @@ import { User } from '../../model/interfaces';
 
 class RegisterDao {
 
-    protected static async registrarUsuarioDao(parametros: User): Promise<any> { 
+    public  async registrarUsuarioDao(parametros: User): Promise<any> { 
         const objetoValidations = {
             correo: "",
             nombre: "",
@@ -41,4 +41,5 @@ class RegisterDao {
     }
 
 }
-export default RegisterDao;
+const registerDao = new RegisterDao();
+export default registerDao;

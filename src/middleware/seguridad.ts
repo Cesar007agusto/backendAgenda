@@ -22,11 +22,12 @@ class Seguridad {
 
         try {
             const payload = jwt.verify(token, process.env.SECRET_KEY as string);
-            req.body.usuario = payload;
+            req.usuario = payload;
             next();
         } catch (error) {
+            
             return res.status(401).json({
-                mensaje: "Token inválido o expirado",
+                mensaje: "Token inválido o expirado, vuelva a iniciar sesión",
             });
         }
 

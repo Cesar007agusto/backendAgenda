@@ -4,7 +4,7 @@ import pool from "../../../config/connexion/connexionDB";
 
 class TareasDao {
   //obtener registros
-  protected static async obtenerTareasDao(parametros:any): Promise<any> {
+  public async obtenerTareasDao(parametros:any): Promise<any> {
     
 
     const salida = await pool.task(async (consulta) => {
@@ -27,7 +27,7 @@ class TareasDao {
   }
 
 
-  protected static async crearTareaDao(parametros: any): Promise<any> {
+  public  async crearTareaDao(parametros: any): Promise<any> {
     const salida: any = [];
     await pool.task(async (Query) => {
       const nombre = await Query.one(SQL_TAREAS.INSERTAR_TAREA, parametros);
@@ -39,7 +39,7 @@ class TareasDao {
 
   }
 
-  protected static async eliminartareaDao(codTarea: number): Promise<{ nombre: string }> {
+  public  async eliminartareaDao(codTarea: number): Promise<{ nombre: string }> {
 
     return  pool.task((Query) => {
       return  Query.one(SQL_TAREAS.ELIMINAR_TAREA, codTarea);
@@ -48,7 +48,7 @@ class TareasDao {
   }
 
 
-  protected static async actualizarTareaDao(parametros:any): Promise<any> {
+  public  async actualizarTareaDao(parametros:any): Promise<any> {
     return pool.task((Query)=>{
       return Query.one(SQL_TAREAS.ACTUALIZAR_TAREA,parametros);
     });
@@ -56,7 +56,7 @@ class TareasDao {
 
   }
 
-  protected static async notificacionesDao(parametros:any):Promise<any>{
+  public  async notificacionesDao(parametros:any):Promise<any>{
     return pool.task((Query)=>{
       return Query.manyOrNone(SQL_TAREAS.TAREAS_PARA_HOY,parametros);
     });
@@ -66,4 +66,6 @@ class TareasDao {
 
 
 }
-export default TareasDao;
+
+const tareasDao = new TareasDao();
+export default tareasDao;

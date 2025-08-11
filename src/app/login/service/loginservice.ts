@@ -1,17 +1,17 @@
 import bcrypt from 'bcryptjs';
 import { User } from "../../model/interfaces";
-import LoginDao from "../dao/loginDao";
+import loginDao from '../dao/loginDao';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 dotenv.config();
 
 
-class LoginService extends LoginDao {
+class LoginService {
 
 
-    static async validarUsuarioService(parametros: User) {
+    public async validarUsuarioService(parametros: User) {
 
-        const usuariobd = await LoginDao.validarUsuarioDao(parametros);
+        const usuariobd = await loginDao.validarUsuarioDao(parametros);
 
         if (usuariobd !== null) {
             const valida = await bcrypt.compare(parametros.contrasena, usuariobd?.contrasena);
@@ -27,7 +27,7 @@ class LoginService extends LoginDao {
                 if (!clave) {
                     console.log('SECRET_KEY no definida');
                 } else {
-                    const token = jwt.sign(payload, clave, { expiresIn: '30m' });
+                    const token = jwt.sign(payload, clave, { expiresIn: '10m' });
                     console.log('Token generado:', token);
                     return token;
                 }
@@ -45,4 +45,5 @@ class LoginService extends LoginDao {
 
 
 }
-export default LoginService;
+const loginService = new LoginService();
+export default loginService;

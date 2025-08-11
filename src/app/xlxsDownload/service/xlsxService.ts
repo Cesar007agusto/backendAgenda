@@ -1,16 +1,18 @@
-import XlsxDao from '../dao/xlsxDao';
+
 import ExcelJS from 'exceljs'
 import { Excel } from '../../model/interfaces';
+import xlsxDao from '../dao/xlsxDao';
+import { CustomRequest } from '../../../doc/@types/customRequest';
+
+
+class XlsxService {
 
 
 
-class XlsxService extends XlsxDao {
+    public async generarXlsx(parametros:any): Promise<Buffer> {
 
-
-
-    protected static async generarXlsx(): Promise<Buffer> {
-
-        let tareas = await XlsxDao.obtenerTareasDao();
+        let tareas = await xlsxDao.obtenerTareasDao(parametros);
+        console.log("en seervice ",tareas);
 
         // Crear un nuevo libro
         const workbook = new ExcelJS.Workbook();
@@ -33,6 +35,8 @@ class XlsxService extends XlsxDao {
                 worksheet.addRow({ nombre: tarea.nombre, fecha: tarea.fecha, estado: 'En proceso' });
             } else if (tarea.estado === '3') {
                 worksheet.addRow({ nombre: tarea.nombre, fecha: tarea.fecha, estado: 'Terminado' });
+            }else{
+                worksheet.addRow({ nombre: tarea.nombre, fecha: tarea.fecha, estado: 'Sin estado' });
             }
 
         });
@@ -44,8 +48,10 @@ class XlsxService extends XlsxDao {
 
     }
 
-    protected static async saveXlsxDb(archivo: Express.Multer.File) {
+    public async saveXlsxDb(archivo: Express.Multer.File,codUser:any) {
         const registros: Excel[] = [];
+    
+        
 
         const workbook = new ExcelJS.Workbook();
         await workbook.xlsx.load(archivo.buffer as any);
@@ -58,14 +64,14 @@ class XlsxService extends XlsxDao {
                 const Fecha = row.getCell(2).value;
                 const Estado = row.getCell(3).value;
             
-                registros.push({nombre:Nombre,fecha:Fecha,estado:Estado});
+                registros.push({nombre:Nombre,fecha:Fecha,estado:Estado,cod_usuario:codUser});
             }
 
         });
 
         //console.log("registros",registros);
 
-        XlsxDao.guardarExcelDao(registros);
+        xlsxDao.guardarExcelDao(registros);
 
     }
 
@@ -74,5 +80,6 @@ class XlsxService extends XlsxDao {
 
 
 }
-export default XlsxService;
+const xlsxService = new XlsxService();
+export default xlsxService;
 

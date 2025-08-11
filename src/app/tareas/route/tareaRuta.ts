@@ -20,10 +20,10 @@ class TareaRuta {
         this.rutaTareaAPI.post("/create",seguridad.verificarToken,tareaControlador.crearTarea);
 
         //http://localhost:3000/tareas/delete
-        this.rutaTareaAPI.delete("/delete/:codTarea", tareaControlador.eliminarTarea);
+        this.rutaTareaAPI.delete("/delete/:codTarea",seguridad.verificarToken, tareaControlador.eliminarTarea);
 
         //http://localhost:3000/tareas/update
-        this.rutaTareaAPI.put("/update",tareaControlador.actualizarTarea);
+        this.rutaTareaAPI.put("/update",seguridad.verificarToken,tareaControlador.actualizarTarea);
 
         //http://localhost:3000/tareas/notificaciones
         this.rutaTareaAPI.get("/notificaciones",seguridad.verificarToken,tareaControlador.notificaciones);

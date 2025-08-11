@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import LoginService from "../service/loginservice";
+import loginService from "../service/loginservice";
 import { User } from "../../model/interfaces";
 
 
-class LoginController extends LoginService {
+class LoginController  {
 
     public async validarUsuarioController(req: Request, res: Response) {
 
@@ -13,8 +13,8 @@ class LoginController extends LoginService {
 
         const objUser: User = { nombre, correo, contrasena };
         try {
-            const respuesta = await LoginService.validarUsuarioService(objUser);
-            console.log("respuesta en controller ", respuesta);
+            const respuesta = await loginService.validarUsuarioService(objUser);
+            
             if (typeof respuesta === "string") {
 
                 res.status(200).json({token: respuesta});

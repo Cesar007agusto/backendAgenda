@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import RegisterService from "../service/registerService";
 import { User } from '../../model/interfaces';
+import registerService from "../service/registerService";
 
-class RegisterController extends RegisterService {
+class RegisterController  {
 
     public async registerUserController(req: Request, res: Response) {
         try {
@@ -12,7 +12,7 @@ class RegisterController extends RegisterService {
             const parametros: User = { nombre, correo, contrasena };
 
             
-            res.status(200).json(await RegisterService.registroservice(parametros));
+            res.status(200).json(await registerService.registroservice(parametros));
 
         } catch (error) {
             console.error(error);
