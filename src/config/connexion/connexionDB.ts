@@ -4,18 +4,23 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const host = String(process.env.HOST);
-const port = Number(process.env.PORT);
-const user = String(process.env.USER_DB);
-const database = String(process.env.DATABASE);
-const password = String(process.env.PASSWORD);
+const host = String(process.env.DB_HOST);
+const port = Number(process.env.DB_PORT);
+const user = String(process.env.DB_USER);
+const database = String(process.env.DB_DATABASE);
+const password = String(process.env.DB_PASSWORD);
 
 
 
 const pgp = pgPromise();
 
 const pool = pgp({
-  user: user, host: host, database: database, password: password, port: port
+  user: user, 
+  host: host, 
+  database: database, 
+  password: password, 
+  port: port,
+  ssl: true
 });
 
 pool

@@ -11,7 +11,7 @@ import cors from 'cors';
 class Server{
 
     public app =express.application;
-
+    
     
 
     constructor(){
@@ -25,7 +25,8 @@ class Server{
 
     corsConfiguration(){
         this.app.use(cors({
-            origin:'http://localhost:8099',// Permite solicitudes desde el frontend
+            //En Render → defines la variable FRONTEND_URL=https://mi-frontend.onrender.com.
+            origin:process.env.FRONTEND_URL || 'http://localhost:8099',// Permite solicitudes desde el frontend
             methods: ['GET', 'POST', 'PUT', 'DELETE'],
             allowedHeaders: ['Content-Type', 'Authorization'], // Cabeceras permitidas
 
@@ -33,7 +34,7 @@ class Server{
     }
 
     loadConfiguration(){
-        this.app.set("PORT",3000);
+        this.app.set("PORT",process.env.PORT || 3000);
         this.app.use(morgan("dev"));
         this.app.use(express.json());
     }
