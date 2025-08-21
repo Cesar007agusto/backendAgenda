@@ -14,7 +14,7 @@ class TareaController {
 
     try {
       const tareas = await tareasDao.obtenerTareasDao(codUsuario);
-
+      
       tareas.map((tarea: any) => {
 
         tarea.fecha = MetodosLogic.quitarHora(tarea.fecha);
@@ -89,6 +89,7 @@ class TareaController {
     const codUser = req.usuario.codUsuario;
     try {
       const registros = await tareasDao.notificacionesDao(codUser);
+      console.log("notificaciones en controller", registros);
       res.status(200).json(registros);
 
     } catch (error) {

@@ -57,8 +57,11 @@ class TareasDao {
   }
 
   public  async notificacionesDao(parametros:any):Promise<any>{
-    return pool.task((Query)=>{
+    return pool.task(async (Query)=>{
+
+      await Query.query("SET TIME ZONE 'America/Bogota'");
       return Query.manyOrNone(SQL_TAREAS.TAREAS_PARA_HOY,parametros);
+
     });
 
   }
