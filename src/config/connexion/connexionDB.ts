@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const host = String(process.env.DB_HOST);
 const port = Number(process.env.DB_PORT);
-const user = String(process.env.DB_USER);
 const database = String(process.env.DB_DATABASE);
+const host = String(process.env.DB_HOST);
+const user = String(process.env.DB_USER);
 const password = String(process.env.DB_PASSWORD);
 
 

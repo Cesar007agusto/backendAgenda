@@ -22,7 +22,8 @@ class LoginService {
                 const payload = {
                     nombre: usuariobd.nombre,
                     correo: usuariobd.correo,
-                    codUsuario: usuariobd.cod_usuario
+                    codUsuario: usuariobd.cod_usuario,
+                    rol: usuariobd.rol
                 };
                 if (!clave) {
                     console.log('SECRET_KEY no definida');

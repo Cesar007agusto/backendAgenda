@@ -10,8 +10,8 @@ export const SQL_REGISTER = {
         WHERE nombre ILIKE \${nombre}`,
 
     REGISTRAR_USUARIO:
-        `INSERT INTO usuarios (nombre,correo,contrasena) VALUES
-        (\${nombre},\${correo},\${contrasena})`
+        `INSERT INTO usuarios (nombre,correo,contrasena,rol) VALUES
+        (\${nombre},\${correo},\${contrasena},'user')`
 
 
 }

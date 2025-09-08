@@ -20,7 +20,7 @@ class Server{
         this.loadConfiguration();
         this.corsConfiguration();
         this.cargarRutas();
-      
+    
     }
 
     corsConfiguration(){
